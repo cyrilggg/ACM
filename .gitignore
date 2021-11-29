@@ -6,3 +6,6 @@
 /.vscode
 /datastructure
 /template
+.gitignore
+ssh -T git@github.com
+*.exe
