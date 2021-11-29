@@ -1,3 +1,4 @@
+.gitignore
 /note
 /C++-homework
 /school project
@@ -6,6 +7,5 @@
 /.vscode
 /datastructure
 /template
-.gitignore
 ssh -T git@github.com
 *.exe
