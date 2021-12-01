@@ -6,11 +6,11 @@
 #include <iostream>
 #include <cstring>
 #include <algorithm>
-
+#define int long long
 using namespace std;
 const int mod = 1e9 + 7;
 
-int main()
+signed main()
 {
     int n;
     cin >> n;
