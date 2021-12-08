@@ -17,13 +17,13 @@ typedef struct
 	float expenditure;
 	int begintime[2];
 	int arrivetime[2];
-} Vehide;
+} Vehide;//
 
 typedef struct
 {
 	Vehide stata[MAX_ROUTE_NUM];
 	int last;
-} infolist;
+} infolist;//ÏßÐÔ±í
 
 typedef struct ArcNode {
 	int adjvex;
