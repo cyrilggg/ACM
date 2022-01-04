@@ -142,7 +142,7 @@ void createcityfile()
 		return;
 	}
 	for( j=0; j<i; j++ )
-		fprintf( fp,"%10s",city[j] );
+		fprintf( fp,"%10s",city[j] );//开始读入信息
 	fclose( fp );
 }
 
@@ -155,7 +155,7 @@ void createplanefile()
 	int count;
 	char vt[10],vh[10],flag;
 	FILE *fp;
-	flag='y';
+	flag = 'y';//用flag来一直确认是否要继续输入，其实也可以用别的方法
 	count=0;
 	
 	while ( flag=='Y' || flag=='y' )
@@ -278,11 +278,11 @@ void createtrainfile()
 int LocateVertex(ALGraph *G,char *v)
 {
 	int j,k;
-	j=-1;
-	for(k=0;k<G->vexnum;k++)
-		if(strcmp(G->vertices[k].cityname,v)==0)
+	j = -1;
+	for(k = 0; k < G -> vexnum ; k ++ )
+		if (strcmp (G -> vertices[k].cityname, v ) == 0 )//邻接表的形式
 		{
-			j=k;
+			j = k;
 			break;
 		}		
 	return(j);
@@ -317,33 +317,33 @@ void CreateGraph(ALGraph *G)
 		strcpy(G -> vertices[j].cityname,city[j]);
 		G -> vertices[j].planefirstarc = NULL;
 		G -> vertices[j].trainfirstarc = NULL;
-		j++;
+		j ++;
 	}
-	G->vexnum=i;
-	if ( (fp=fopen("plane.txt","rb"))==NULL ) printf( "\n无法打开文件!\n" );				 
-	k=0;
+	G -> vexnum = i;
+	if ( (fp=fopen("plane.txt","rb")) == NULL ) printf( "\n无法打开文件!\n" );				 
+	k = 0;
 	fscanf(fp,"%d",&count1);
-	while(k<count1)//读入计数
+	while(k < count1)//读入计数
 	{
 		if ( fread(&a[k],sizeof(struct arc),1,fp)!=1 ) printf( "\n文件读入错误!\n" );				 
-		k++;
+		k ++;
 	}
 	fclose(fp);
-	k=0;
+	k = 0;
 	arc_num=0;
-	while(k<count1)
+	while(k < count1)
 	{
-		i=LocateVertex(G,a[k].vt);
-		j=LocateVertex(G,a[k].vh);
-		q=G->vertices[i].planefirstarc;
-		m=0;
-		while(q!=NULL)
+		i = LocateVertex(G,a[k].vt);
+		j = LocateVertex(G,a[k].vh);
+		q = G -> vertices[i].planefirstarc;
+		m = 0;
+		while (q != NULL)//从数组存到线性表存
 		{
-			if(q->adjvex==j)
+			if (q -> adjvex == j)
 			{
-				t=q->info.last+1;
-				q->info.stata[t].number=a[k].co;
-				q->info.stata[t].expenditure=a[k].mo;
+				t = q -> info.last + 1;
+				q -> info.stata[t].number = a[k].co;
+				q -> info.stata[t].expenditure = a[k].mo;
 				q->info.stata[t].begintime[0]=a[k].bt[0];
 				q->info.stata[t].begintime[1]=a[k].bt[1];
 				q->info.stata[t].arrivetime[0]=a[k].at[0];
@@ -352,26 +352,26 @@ void CreateGraph(ALGraph *G)
 				m=1;
 				break;
 			}
-			q=q->nextarc;
+			q = q -> nextarc;
 		}
-		if(m==0)
+		if (m == 0)
 		{
-			p=(ArcNode*)malloc(sizeof(ArcNode));
-			p->adjvex=j;
-			p->info.stata[0].number=a[k].co;
-			p->info.stata[0].expenditure=a[k].mo;
-			p->info.stata[0].begintime[0]=a[k].bt[0];
-			p->info.stata[0].begintime[1]=a[k].bt[1];
-			p->info.stata[0].arrivetime[0]=a[k].at[0];
-			p->info.stata[0].arrivetime[1]=a[k].at[1];
-			p->info.last=0;
-			p->nextarc=G->vertices[i].planefirstarc;
-			G->vertices[i].planefirstarc=p;
-			arc_num++;
+			p = (ArcNode*)malloc(sizeof(ArcNode));
+			p -> adjvex=j;
+			p -> info.stata[0].number=a[k].co;
+			p -> info.stata[0].expenditure=a[k].mo;
+			p -> info.stata[0].begintime[0]=a[k].bt[0];
+			p -> info.stata[0].begintime[1]=a[k].bt[1];
+			p -> info.stata[0].arrivetime[0]=a[k].at[0];
+			p -> info.stata[0].arrivetime[1]=a[k].at[1];
+			p -> info.last=0;
+			p -> nextarc=G->vertices[i].planefirstarc;
+			G -> vertices[i].planefirstarc=p;
+			arc_num ++;
 		}
 		k++;
 	}
-	G->planearcnum=arc_num;
+	G -> planearcnum = arc_num;
 	if((fp=fopen("train.txt","rb"))==NULL)
 	{
 		printf( "\n无法打开文件!\n" );
@@ -1242,7 +1242,7 @@ void TransferDispose( int k, infolist (*arcs)[MAX_VERTEX_NUM], ALGraph G, int v0
 	LinkQueue Q;
 	ArcNode *t;
 	Node *p,*q,*r,*s;
-	p = (Node *)malloc(G.vexnum*sizeof(Node));
+	p = (Node *)malloc(G.vexnum * sizeof(Node));
 	for ( v=0; v<G.vexnum; v++ )
 	{
 		visited[v] = 0;
@@ -1316,11 +1316,11 @@ void TransferDispose( int k, infolist (*arcs)[MAX_VERTEX_NUM], ALGraph G, int v0
 								 << endl;								 
 						q = r;
 						r = r->next;
-						n++;
+						n ++;
 					}
 					
 					printf( "最少中转次数是 %s 次\n", n-2 );						 
-					for ( v=0;v<G.vexnum;v++ )
+					for ( v = 0; v < G.vexnum; v ++ )
 					{
 						q = p[v].next;
 						while ( q!=NULL )
@@ -1516,7 +1516,7 @@ void ExpenditureDispose( int k, infolist (*arcs)[MAX_VERTEX_NUM], ALGraph G, int
 }
 
 
-//两直达城市之间最少旅行时间和相应路径
+//两直达城市之间最少旅行时间和相应路径,只在最短时间处理那个函数中调用过
 void MinTime(infolist arcs,int *time,int *route)
 {
 	int i,t[2];
@@ -1525,7 +1525,7 @@ void MinTime(infolist arcs,int *time,int *route)
 	if ( time[0]<0 ) time[0]=time[0]+24;//日期预处理
 	if(time[1]<0) { time[0]--; time[1]=time[1]+60; }//时间预处理
 	*route=0;
-	for ( i=1; i<=arcs.last; i++ )//dijkstra
+	for ( i=1; i<=arcs.last; i++ )//从线性表依次枚举罢了
 	{
 		t[0] = arcs.stata[i].arrivetime[0]-arcs.stata[i].begintime[0];  
 		t[1] = arcs.stata[i].arrivetime[1]-arcs.stata[i].begintime[1];	 
@@ -1583,7 +1583,7 @@ void TimeTreeDispose( Node *head, infolist (*arcs)[MAX_VERTEX_NUM] )
 	DestoryTimeTree( root );
 }
 
-//创建时间树
+//创建时间树，就是树，全代码唯一用到树的地方
 void CreateTimeTree( TimeTree p, int i, int j, LinkQueue *Q, infolist (*arcs)[MAX_VERTEX_NUM] )
 {
 	int n,x,y;
@@ -1607,10 +1607,10 @@ void CreateTimeTree( TimeTree p, int i, int j, LinkQueue *Q, infolist (*arcs)[MA
 		q->route = n;
 		p->child[n] = q;
 	}
-	while ( n<MAX_ROUTE_NUM )
+	while ( n < MAX_ROUTE_NUM )
 	{
 		p->child[n] = NULL;
-		n++;
+		n ++;
 	}
 	x = j;
 	if ( !IsEmpty(Q) )
@@ -1771,11 +1771,11 @@ void TimeDispose( int k, infolist (*arcs)[MAX_VERTEX_NUM], ALGraph G, int v0, in
 {
 	int v,w,i,route,m[2];
 	Node *p,*q,*r,*s,*t;
-	p = (Node *)malloc(G.vexnum*sizeof(Node));
+	p = (Node *)malloc (G.vexnum*sizeof(Node));
 	for ( v=0; v<G.vexnum; v++ )
 	{
 		*(final+v) = False;
-		MinTime( *(*(arcs+v0)+v),*(T+v), &route );
+		MinTime( *(*(arcs+v0)+v),*(T+v), &route );//返回了这个road是指向最短的节点的地方
 		p[v].next=NULL;
 		if ( *(*(T+v)+0)<INFINITY&&*(*(T+v)+1)<INFINITY )
 		{
@@ -1963,7 +1963,7 @@ void PrintGraph(ALGraph *G)
 								 << "---->"
 								 << G->vertices[q->adjvex].cityname
 								 << endl;
-							for (k=0;k<=q->info.last;k++)
+							for (k=0;k <= q -> info.last; k ++ )
 								cout << "    number: "
 									 << q->info.stata[k].number
 									 << "  expenditure: "

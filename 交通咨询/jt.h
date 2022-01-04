@@ -11,36 +11,42 @@
 #define MAX_ARC_SIZE	200
 #define MAX_ROUTE_NUM	10
 
+//交通工具信息
 typedef struct
 {
 	int number;
 	float expenditure;
 	int begintime[2];
 	int arrivetime[2];
-} Vehide;//
+} Vehide;
 
+//线性表里面嵌套着交通工具结构体
 typedef struct
 {
 	Vehide stata[MAX_ROUTE_NUM];
 	int last;
-} infolist;//线性表
+} infolist;
 
+//图节点
 typedef struct ArcNode {
 	int adjvex;
 	struct ArcNode *nextarc;
 	infolist info;
 } ArcNode;
 
+//邻接表
 typedef struct VNode {
-	char cityname[10];
+	char cityname[10];//存了城市
 	ArcNode  *planefirstarc, *trainfirstarc;
 } VNode, AdjList[MAX_VERTEX_NUM];
 
+//用邻接表表示的图，其中adjlist是数组
 typedef struct {
 	AdjList vertices;
 	int  vexnum, planearcnum, trainarcnum;
 } ALGraph;
 
+//存路线的图的点
 typedef struct Node
 {
 	int adjvex;
@@ -48,18 +54,21 @@ typedef struct Node
 	struct Node *next;
 } Node;
 
+//队列节点
 typedef struct QNode
 {
 	int adjvex;
 	struct QNode *next;
 } QNode;
 
+//队列
 typedef struct
 {
 	QNode *front;
 	QNode *rear;
 } LinkQueue;
 
+//时间树，有边有路线
 typedef struct TimeNode
 {
 	int  adjvex;
@@ -69,14 +78,16 @@ typedef struct TimeNode
 	struct TimeNode *child[MAX_ROUTE_NUM];
 } TimeNode, *TimeTree;
 
+///用来存储时间地点的数组
 struct arc
 {
-	int   co;
-	char  vt[10];
-	char  vh[10];
-	int   bt[2];
-	int   at[2];
-	float mo;
+	int   co;//列车编号
+	char  vt[10];//起始城市
+	char  vh[10];//终止城市
+	
+	int   bt[2];//发车时间
+	int   at[2];//到达时间
+	float mo;//费用
 } a[MAX_ARC_SIZE];
 
 void InitQueue(LinkQueue *Q);
