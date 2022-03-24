@@ -1,43 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
-
-int n, m;
-
-int get(int i)
-{
-    return ((m % i != 0) ? (i - m % i) : 0)  + n - i;
-}
-
-int check(int l, int r)
-{
-    int x = get(l), y = get(r); 
-    return x - y;
-}
+#define endl '\n'
 
 void solve()
 {
-    cin >> n >> m;
-    if (m % n == 0) puts("0");
-    else
+    int n;
+    string a;
+    cin >> n >> a;
+    int cnt = 0;
+    vector<int>l, r;
+    for (int i = 0; i < a.size(); i ++ )
     {
-        int ans = 1e12;
-        if (n > m) ans = n - m % (m + 1);
+        if (a[i] == '(') l.push_back(i);
+        else r.push_back(i);
+    }
+    int lidx = 0, ridx = 0;
+    int i = 0;
+    for (; i < a.size() - 1; )
+    {
+
+        if (a[i] == '(')
+        {
+            while (ridx < r.size() && r[ridx] <= i) ridx ++;
+            while (lidx < l.size() && l[lidx] <= i) lidx ++;
+            if (ridx == r.size() && lidx == l.size()) break;
+            int maxn = -1;
+            if (ridx < r.size()) maxn = max(r[ridx], maxn);
+            if (lidx < l.size()) maxn = max(l[lidx], maxn);
+            cnt ++ ;
+            i = maxn + 1;
+        }
         else
         {
-            int l = 1, r = n;
-            while(l < r)  // 三分x
-            {
-                int mid = (l + r) / 2;
-                int mmid = (mid + r) / 2;
-                if(check(l, mid) * check(mid, mmid) < 0) r = mmid;
-                else l = mid; // 这里是r = mmid;
-                cout << l <<' ' <<r << endl;
-            }
-            ans = get(l);
+            
+         
+            while (ridx < r.size() && r[ridx] <= i) ridx ++;
+            if (ridx == r.size()) break;
+            cnt ++ ;
+            i = r[ridx] + 1;
+            
         }
-        cout << ans << endl;
+        cout << i <<' '<< lidx << ' ' <<ridx <<' '<<a.size()<<  endl;
     }
+    cout << cnt << ' ' << a.size() - i << endl;
 }
 
 signed main()
