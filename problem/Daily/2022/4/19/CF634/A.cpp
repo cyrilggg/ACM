@@ -2,10 +2,12 @@
 using namespace std;
 #define int long long
 #define endl '\n'
-#define returnNo return void(puts("No"))
-#define returnYes return void(puts("Yes"))
+
 void solve()
 {
+    int x;
+    cin >> x;
+    cout << (x - 1) / 2 << endl;
 }
 
 signed main()

@@ -2,10 +2,17 @@
 using namespace std;
 #define int long long
 #define endl '\n'
-#define returnNo return void(puts("No"))
-#define returnYes return void(puts("Yes"))
+
 void solve()
 {
+    int n, m;
+    cin >> n >> m;
+    if (n < m) swap(n, m);
+    if ((n == 1 && m > 2) || (m == 1 && n > 2)) {
+        cout << -1 << endl;
+        return;
+    }
+    cout << (n - 1) * 2 - ((n - m) & 1) << endl;
 }
 
 signed main()

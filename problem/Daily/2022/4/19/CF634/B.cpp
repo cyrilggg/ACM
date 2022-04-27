@@ -2,10 +2,20 @@
 using namespace std;
 #define int long long
 #define endl '\n'
-#define returnNo return void(puts("No"))
-#define returnYes return void(puts("Yes"))
+
 void solve()
 {
+    int n, a, b;
+    cin >> n >> a >> b;
+    int cnt = (a + b - 1) / b;
+    int idx = 0;
+    for (int i = 0; i < n; i ++ )
+    {
+        cout << char(idx + 'a');
+        idx ++;
+        if (idx >= b) idx = 0;
+    }
+    cout << endl;
 }
 
 signed main()
