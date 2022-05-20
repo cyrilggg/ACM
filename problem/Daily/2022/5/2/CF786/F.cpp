@@ -4,6 +4,7 @@ using namespace std;
 #define endl '\n'
 #define returnNo return void(puts("No"))
 #define returnYes return void(puts("Yes"))
+
 void solve()
 {
 }

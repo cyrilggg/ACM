@@ -4,8 +4,16 @@ using namespace std;
 #define endl '\n'
 #define returnNo return void(puts("No"))
 #define returnYes return void(puts("Yes"))
+
 void solve()
 {
+    int a, b, c, x, y;
+    cin >> a >> b >> c >> x >> y;
+    x -= a, y -= b;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x + y > c) returnNo;
+    else returnYes;
 }
 
 signed main()

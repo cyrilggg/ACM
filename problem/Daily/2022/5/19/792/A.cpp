@@ -18,6 +18,21 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 void solve()
 {
+    string a;
+    cin >> a;
+    if (a.size() == 2)
+    {
+        cout << a[1] << endl;
+    }
+    else
+    {
+    char minn = '9';
+    for (int i = 0; i < a.size(); i ++ )
+    {
+        minn = min(minn, a[i]);
+    }
+    cout << minn << endl;
+    }
 }
 
 signed main()

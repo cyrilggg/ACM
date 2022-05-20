@@ -6,6 +6,11 @@ using namespace std;
 #define returnYes return void(puts("Yes"))
 void solve()
 {
+    int t = 1;
+    cout << 1 << endl;
+    srand(time(0));
+    int n = rand() % 100 + 1;
+    cout << n << endl;
 }
 
 signed main()
@@ -14,7 +19,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

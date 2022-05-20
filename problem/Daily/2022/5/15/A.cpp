@@ -16,8 +16,30 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #define debug(...) 
 #endif
 
+int work(vector<int>&v)
+{
+    int res = 0;
+    for (int i = 0; i < v.size() - 1; i ++ )
+    {
+        if (v[i] == v[i + 1]) res ++;
+    }
+    return res;
+}
+
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>a(n), b(n);
+    for (int i = 0; i < n; i ++ )   cin >> a[i];
+    for (int i = 0; i < n; i ++ )   cin >> b[i];
+    int cnta = work(a), cntb = work(b);
+    if (cnta > cntb)
+    {
+        cout << "Alice Bob";
+    }
+    else cout << "Bob Alice";
+    
 }
 
 signed main()
@@ -26,7 +48,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

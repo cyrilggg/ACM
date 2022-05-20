@@ -6,6 +6,9 @@ using namespace std;
 #define returnYes return void(puts("Yes"))
 void solve()
 {
+    int p, a, b, c;
+    cin >> p >> a >> b >> c;
+    cout << min({(p + (a - 1)) / a * a - p, (p + (b - 1) )/ b * b - p, (p + (c - 1)) / c * c - p}) << endl;
 }
 
 signed main()

@@ -4,8 +4,13 @@ using namespace std;
 #define endl '\n'
 #define returnNo return void(puts("No"))
 #define returnYes return void(puts("Yes"))
+
 void solve()
 {
+    int a, b;
+    cin >> a >> b;
+    if (b % a != 0) cout << 0 << ' ' << 0 << endl;
+    else cout << 1 << ' ' << b / a<< endl;
 }
 
 signed main()

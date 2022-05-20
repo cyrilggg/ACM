@@ -18,6 +18,28 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 void solve()
 {
+    int n, m;
+    cin >> n >> m;
+    string s, t;
+    cin >> s >> t;
+    s = "x" + s;
+    t = "x" + t;
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+    int ans = -1;
+    for (int i = 1; i <= n; i ++ )
+    {
+        for (int j = 1; j <= m; j ++ )
+        {
+            if (s[i] == t[j]) 
+            {
+                dp[i][j] = dp[i - 1][j - 1] + 2;
+            }
+            else dp[i][j] = max(0ll, max(dp[i - 1][j], dp[i][j - 1]) - 1);
+            
+            ans = max(ans, dp[i][j]);
+        }
+    }
+    cout << ans << endl;
 }
 
 signed main()
@@ -26,7 +48,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

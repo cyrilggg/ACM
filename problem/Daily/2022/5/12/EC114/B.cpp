@@ -4,8 +4,14 @@ using namespace std;
 #define endl '\n'
 #define returnNo return void(puts("No"))
 #define returnYes return void(puts("Yes"))
+
 void solve()
 {
+    int a, b, c, m;
+    cin >> a >> b >> c >> m;
+    if (max(a - 1, 0ll) + max(b - 1, 0ll) + max(c - 1, 0ll) < m) returnNo;
+    if (max(2 * max({a, b, c}) - a - b - c - 1, 0ll) > m) returnNo;
+    returnYes;
 }
 
 signed main()

@@ -18,6 +18,44 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 void solve()
 {
+    int n;
+    cin >> n;
+    string a, b;
+    cin >> a >> b;
+    int cnta = 0, cntb = 0;
+    for (int i = 0; i < n; i ++ )
+    {
+        if (a[i] == 'w') cnta ++;
+    }
+    for (int i = 0; i < n; i ++ )
+    {
+        if (b[i] == 'w') cntb ++;
+    }
+    if (cnta != cntb)
+    {
+        cout << "Impossible" << endl;
+    }
+    else
+    {
+        int ans = 1;
+        int ttl = 2;
+        while (a != b && ttl)
+        {
+            
+            vector<int>idx;
+            for (int i = 0; i < n; i ++ )
+            {
+                if (a[i] != b[i]) idx.push_back(i);
+            }
+            for (int i = idx.size() - 1; i; i -- )
+            {
+                swap(a[idx[i]], a[idx[i - 1]]);
+            }
+            ttl --;
+            ans ++;
+        }
+        cout << ans << endl;
+    }
 }
 
 signed main()
@@ -26,7 +64,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

@@ -18,6 +18,14 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 void solve()
 {
+    string s, t;
+    cin >> s >> t;
+    int idx = s.size() - 1;
+    while(idx >= 0 && s[idx] == 'z') idx --;
+    s[idx] ++;
+    for (int i = idx + 1; i < s.size(); i ++ )s[i] = 'a';
+    if (s < t) cout << s << endl;
+    else cout << "No such string" << endl;
 }
 
 signed main()
@@ -26,7 +34,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

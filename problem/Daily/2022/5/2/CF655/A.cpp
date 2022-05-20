@@ -6,6 +6,14 @@ using namespace std;
 #define returnYes return void(puts("Yes"))
 void solve()
 {
+   int n;
+   cin >> n;
+   for (int i = 1; i <= n; i ++ )
+   {
+      if (i & 1) cout << 1 << ' ';
+      else cout << 100 << ' ';
+   }
+   cout << endl;
 }
 
 signed main()
