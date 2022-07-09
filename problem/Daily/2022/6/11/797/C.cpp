@@ -21,6 +21,25 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>s(n), f(n), d(n);
+    for (int i = 0; i < n; i ++ )   cin >> s[i];
+    for (int i = 0; i < n; i ++ )   cin >> f[i];
+    int cur = 0, st = 0;
+    for (int i = 0; i < n; i ++ )
+    {
+        while (i < n && cur > f[i])
+        {
+            d[i] = 0;
+            i ++ ;
+        }
+        if (cur > s[i]) st = cur;
+        else st = s[i];
+        cur = f[i];
+        d[i] = cur - st;
+    }
+    for (int i = 0; i < n; i ++ )   cout << d[i] << " \n"[i == n - 1];
 }
 
 signed main()

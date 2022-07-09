@@ -21,6 +21,22 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n, m;
+    cin >> n >> m;
+    vector<pair<int,int>>v(n + 1);
+    vector<int>pre(n + 1);
+    for (int i = 1; i <= n; i ++ )  cin >> v[i].first >> v[i].second;
+
+    for (int i = 1; i <= n; i ++ )
+    {
+        pre[i] = pre[i - 1] + v[i].first + v[i].second;
+    }
+    int ans = pre[1] + (m - 1) * v[1].second;
+    for (int i = 2; i <= min(n, m); i ++ )
+    {
+        ans = min(ans, pre[i] + (m - i) * v[i].second);
+    }
+    cout << ans << endl;
 }
 
 signed main()
@@ -29,7 +45,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

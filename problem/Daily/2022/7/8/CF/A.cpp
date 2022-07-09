@@ -21,6 +21,16 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int cnt = 0;
+    for (int i = 0; i <= 3; i ++)
+    {
+        int x;
+        cin >> x;
+        cnt += x == 1;
+    }
+    if (cnt == 0) cout << 0 << endl;
+    else if (cnt <= 3) cout << 1 << endl;
+    else cout << 2 << endl;
 }
 
 signed main()

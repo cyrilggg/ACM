@@ -21,6 +21,25 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n ,m;
+    cin >> n >> m;
+    vector<int>v(m);
+    for (int i = 0; i <= m; i ++ )
+    {
+        v.push_back(n / (m + 1));
+    }
+    sort(v.begin(), v.end());
+    for (int i = 0; i < n % m; i ++ )
+    {
+        v[i] ++;
+    }
+    sort(v.begin(), v.end());
+    string a;
+    cin >> a;
+    for (int i = 0; i < n; i ++ )
+    {
+        
+    }
 }
 
 signed main()

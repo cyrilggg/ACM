@@ -21,6 +21,36 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>v(n + 1);
+    map<int,int>mp;
+    for (int i = 1; i <= n; i ++ )
+    {
+        int x;
+        cin >> x;
+        x %= 10;
+        mp[x] ++;    
+    }
+    for (int i = 0; i <= 9; i ++ )
+    {
+        for (int j = 0; j <= 9; j ++ )
+        {
+            for (int k = 0; k <= 9; k ++ )
+            {
+                if (((i + j + k) % 10) == 3)
+                {
+                    if (i == j && j == k && mp[j] < 3) continue;
+                    if (i == j && mp[i] < 2) continue;
+                    if (i == k && mp[i] < 2) continue;
+                    if (j == k && mp[j] < 2) continue;
+                    if (mp[i] && mp[j] && mp[k])
+                    returnYes;
+                }
+            }
+        }
+    }
+    returnNo;
 }
 
 signed main()

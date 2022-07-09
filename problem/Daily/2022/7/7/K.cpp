@@ -21,6 +21,24 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    set<int>v;
+    for (int i = 0; i <= 120; i ++ )
+    {
+        for (int j = 0; j <= 120; j ++ )
+        {
+            for (int k = 0; k <= 120; k ++ )
+            {
+                for (int s = 0; s <= 120; s ++ )
+                {
+                    v.insert(i * 5 + 7 * j + 11 * k + 13 * s);
+                }
+            }
+        }
+    }
+    for (int i = 1; i <= 3600; i ++ )
+    {
+        if (!v.count(i))cout << i << endl;
+    }
 }
 
 signed main()
@@ -29,7 +47,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   cin >> _;
+   //cin >> _;
    while (_--)
       solve();
 }

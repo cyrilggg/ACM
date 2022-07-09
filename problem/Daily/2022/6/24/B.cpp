@@ -21,6 +21,18 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    set<int>s;
+    int diff = 0;
+    for (int i = 1; i <= n; i ++ )
+    {
+        int x;
+        cin >> x;
+        if (s.count(x)) diff ++;
+        else s.insert(x);
+    }
+    cout << s.size() - (diff & 1) << endl;
 }
 
 signed main()

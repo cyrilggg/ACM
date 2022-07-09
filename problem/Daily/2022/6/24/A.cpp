@@ -21,6 +21,9 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    cout << ((b > a) + (d > a) + (c > a)) << endl;
 }
 
 signed main()

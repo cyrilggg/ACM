@@ -16,22 +16,22 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #define debug(...) 
 #endif
 
+int n;
+vector<int>v;
+bool dfs(int u, int x, bool check)
+{
+    if (u == n + 1)
+        return x == 0 && check;
+    else return dfs(u + 1, x + v[u], true) || dfs(u + 1, x, check) || dfs(u + 1, x - v[u], true);
+}
+
 void solve()
 {
-    int n;
     cin >> n;
-    vector<int>v(n + 1);
-    map<int,int>mp;
-    bool flag = false;
-    mp[0] = 1;
+    v.resize(n + 1);
     for (int i = 1; i <= n; i ++ )
-    {
         cin >> v[i];
-        if (mp[v[i]]) flag = true;
-        mp[v[i]] = 1;
-    }
-    for (auto )
-    if (flag)returnYes;
+    if (dfs(1, 0, false))returnYes;
     else returnNo;
 }
 

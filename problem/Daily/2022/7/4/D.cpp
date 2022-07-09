@@ -21,6 +21,7 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+
 }
 
 signed main()

@@ -16,11 +16,28 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #endif
 
 #define int long long
-#define endl '\n'
+//#define endl '\n'
 constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    string a;
+    cin >> a;
+    map<int,int>mp;
+    int cnt = 0;
+    for (int i = 0; i < a.size(); i ++ )
+    {
+        mp[a[i] - '0'] ++;
+        cnt += a[i] - '0';
+    }
+    if (mp[0] >= 1 && (cnt % 3 == 0) && (mp[0] > 1 || mp[2] || mp[4] || mp[6] || mp[8]) )
+    {
+        cout << "red" << endl;
+    }
+    else
+    {
+        cout << "cyan" << endl;
+    }
 }
 
 signed main()

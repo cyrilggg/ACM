@@ -21,6 +21,28 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>a(n), b(n);
+    for (int i = 0; i < n; i ++ )   cin >> a[i];
+    for (int i = 0; i < n; i ++ ){
+        cin >> b[i];
+    }
+    int l = 0, r = 1e9;
+    for (int i = 0; i < n ; i ++ )
+    {
+        if (b[i] == 0)
+        {
+            l = max(l, a[i]);
+        }
+        else{
+            l = max(l, a[i] - b[i]);
+            r = min(r, a[i] - b[i]);
+        }
+    }
+    if (l <= r)
+    returnYes;
+    else returnNo;
 }
 
 signed main()

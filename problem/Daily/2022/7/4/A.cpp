@@ -21,6 +21,16 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    if (n & 1)
+    {
+        cout << -1 << endl;
+    }
+    else
+    {
+        cout << 0 << ' ' << n / 2 << ' ' << n / 2 << endl;
+    }
 }
 
 signed main()

@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+#define int long long
+#define endl '\n'
 #define returnNo return void(puts("No"))
 #define returnYes return void(puts("Yes"))
 
@@ -15,12 +16,24 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #define debug(...) 
 #endif
 
-#define int long long
-#define endl '\n'
-constexpr int N = 2e5 + 10;
-
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>v(n + 1), s(n + 1);
+    for (int i = 1; i <= n; i ++ )
+    {
+        cin >> v[i];
+        s[i] = v[i];
+    }
+    sort(s.begin(), s.end());
+    int maxn = -1;
+    for (int i = 1; i <= n; i ++ )
+    {
+        if (s[i] != v[i])
+            maxn &= i - 1;
+    }
+    cout << maxn << endl;
 }
 
 signed main()

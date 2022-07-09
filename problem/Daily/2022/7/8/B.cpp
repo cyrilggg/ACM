@@ -21,6 +21,12 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    if (n  < 14) returnNo;
+    n %= 14;
+    if (n <= 6 && n >= 1) returnYes;
+    else returnNo;
 }
 
 signed main()

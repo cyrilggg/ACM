@@ -21,6 +21,21 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    int ans = 1e12;
+    vector<int>pre(n + 1);
+    for (int i = 1; i <= n; i ++ )
+    {
+        pre[i] = pre[i - 1] ;
+        if (s[i - 1] == 'W') pre[i] ++ ;
+        if (i >= k) ans = min(pre[i] - pre[i - k], ans);
+    }
+    debug(pre);
+    cout << ans << endl;
+
 }
 
 signed main()

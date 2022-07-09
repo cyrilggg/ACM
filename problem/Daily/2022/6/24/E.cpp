@@ -21,6 +21,55 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n, ss;
+    cin >> n >> ss;
+    vector<int>v(n + 1), s(n + 1);
+    v.push_back(0);
+    for (int i = 1; i <= n; i ++ )
+    {
+        cin >> v[i];
+        s[i] = s[i - 1] + v[i];
+    }
+    int sum = accumulate(v.begin() + 1, v.end(), 0);
+    if(sum < ss)
+    {
+        cout << -1 << endl;
+        return;
+    }
+    if (sum == ss)
+    {
+        cout << 0 << endl;
+        return;
+    }
+    int start = -1;
+    int ans = 0;
+    for (int i = 1; i <= n; i ++ )
+    {
+        if (s[i] == (sum - ss))
+        {
+            start = i;
+            ans = i;
+            break;
+        }
+    }
+    int cnt = 0;
+    for (int i = start - 1, j = n + 1; i < j && i >= 1; i --, j --, cnt ++ )
+    {
+        while (i < j && v[j] == 0)
+        {
+            j --;
+            cnt ++;
+        }
+        while (i >= 1 && v[i] == 0)
+        {
+            i --;
+        }
+        debug(i, j, i + cnt);
+        ans = min(ans, i + cnt);
+    
+    }
+    cout << ans << endl;
+    debug(ans);
 }
 
 signed main()

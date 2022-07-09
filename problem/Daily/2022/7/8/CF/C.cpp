@@ -19,8 +19,49 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #define endl '\n'
 constexpr int N = 2e5 + 10;
 
+map<int,int>mp;
+int n, m;
+
+bool check(int x)
+{
+    int cnt = 0;
+    for (auto &[a, b] : mp)
+    {
+        if (b >= x) cnt += x;
+        else cnt += b + (x - b) / 2;
+    }
+    return cnt >= m;
+}
+
 void solve()
 {
+    cin >> n >> m;
+    mp.clear();
+    for (int i = 1; i <= n; i ++ )
+    {
+        mp[i] = 0;
+    }
+    for (int i = 1; i <= m; i ++ )  {
+        int x;
+        cin >> x;
+        mp[x] ++;
+    }
+    int l = 0, r = 1e9;
+    while (l < r)
+    {
+        int mid = l + r >> 1;
+        if(check(mid)) r = mid;
+        else l = mid + 1;
+    }
+    for (int i = l - 1; i <= r; i ++ )
+    {
+        if (check(i))
+        {
+            cout << i << endl;
+            return;
+        }
+    }
+    
 }
 
 signed main()

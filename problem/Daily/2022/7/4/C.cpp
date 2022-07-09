@@ -21,6 +21,11 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>v(n + 1);
+    for (int i = 1; i <= n; i ++ )  cin >> v[i];
+    
 }
 
 signed main()

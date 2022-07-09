@@ -15,12 +15,44 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #define debug(...) 
 #endif
 
-#define int long long
 #define endl '\n'
 constexpr int N = 2e5 + 10;
 
+string work(int x)
+{
+    string a;
+    while (x)
+    {
+        a += to_string(x & 1);
+        x >>= 1;
+    }
+    reverse(a.begin(), a.end());
+    return a;
+}
+
 void solve()
 {
+    int n, k;
+    cin >> n >> k;
+    vector<int>v(n);
+    for (int i = 0; i < n; i ++ )
+    {
+        cin >> v[i];
+    }
+    debug(v);
+    int ans = 0;
+    for (int i = 0; i < v.size(); i ++ )
+    {
+        int len = 1;
+        while (i + 1 < v.size() &&(2 * v[i + 1] > v[i]))
+        {
+            i ++;
+            len ++;
+        }
+        ans += (len - k) > 0 ? len - k : 0;
+    }
+    debug(ans);
+    cout << ans << endl;
 }
 
 signed main()

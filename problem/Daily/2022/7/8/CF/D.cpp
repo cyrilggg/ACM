@@ -17,10 +17,43 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 #define int long long
 #define endl '\n'
-constexpr int N = 2e5 + 10;
+constexpr int N = 5e5 + 10;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int>v(n + 1), ans(n + 1);
+    vector<int>l(n + 1), r (n + 1);
+    for (int i = 1; i <= n; i ++ ){
+        cin >> v[i];
+    }
+    for (int i = 1; i <= n; i ++ )
+    {
+        if (v[i] == 0){
+            l[i] = i + 1, r[i] = n;
+        }
+        else{
+            l[i] = i / (v[i] + 1) + 1, r[i] = i / v[i];
+        }
+    }
+    vector<vector<int>>vv(n + 1);
+    for (int i = 1; i <= n; i ++ ){
+        vv[l[i]].push_back(i);
+    }
+    set<pair<int,int>>S;
+    for (int i = 1; i <= n; i ++ ){
+        for (auto &j : vv[i])
+        {
+            S.emplace(r[j], j);
+        }
+        assert(!S.empty());
+        ans[S.begin() -> second] = i;
+        S.erase(S.begin());
+    }
+    for (int i = 1; i <= n; i ++ ){
+        cout << ans[i] << " \n"[i == n];
+    }
 }
 
 signed main()

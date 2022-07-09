@@ -21,6 +21,23 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
+   int n;
+   cin >> n;
+   cout << 2 << endl;
+   map<int,int>mp;
+   for (int i = 1; i <= n; i ++ )
+   {
+      if (mp[i]) continue;
+      cout << i << " ";
+      mp[i] = 1;
+      for (int j = i * 2; j <= n; j <<= 1)
+      {
+          if (mp[j]) break;
+         cout << j << " ";
+         mp[j] = 1;
+      }
+   }
+   cout << endl;
 }
 
 signed main()

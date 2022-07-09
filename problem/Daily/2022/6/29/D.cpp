@@ -16,11 +16,46 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #endif
 
 #define int long long
-#define endl '\n'
+//#define endl '\n'
 constexpr int N = 2e5 + 10;
+
+bool check(pair<int, int> p)
+{
+    
+    cout << "?" << ' ' << p.first << ' ' << p.second << endl;
+    vector<int>v;
+    int cnt = 0;
+    for (int i = p.first; i <= p.second; i ++ )
+    {
+        int x;
+        cin >> x;
+        v.push_back(x);
+    }
+    for (auto &vv : v)
+    {
+        if (vv >= p.first && vv <= p.second) cnt ++;
+    }
+    return !(cnt & 1);
+}
 
 void solve()
 {
+    int n;
+    cin >> n;
+    int l = 1, r = n;
+    while (l < r)
+    {
+        int mid = l + r >> 1;
+        if (check({l, mid})) l = mid + 1 ;
+        else r = mid;
+    }
+    // cout << "?" << ' ' << l << ' ' << l << endl;
+    // int x;
+    // cin >> x;
+    // if (x == l)
+    // cout <<"!" << ' '<< l << endl;
+    // else
+    cout <<"!" << ' '<< r << endl;
 }
 
 signed main()
