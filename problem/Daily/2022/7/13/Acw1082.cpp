@@ -17,41 +17,50 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 #define int long long
 #define endl '\n'
-constexpr int N = 2e5 + 10;
+constexpr int N = 15;
+int l, r;
+int f[N][N];
+
+void init()
+{
+    for (int i = 0; i < N; i ++ ) f[1][i] = 1;
+
+    for (int i = 2; i < N; i ++ )
+        for (int j = 0; j <= 9; j ++ )
+            for (int k = j; k <= 9; k ++ )
+                f[i][j] += f[i - 1][k];
+}
+int dp(int n)
+{
+    if (!n) return 1;
+    vector<int>nums;
+    while (n) nums.push_back(n % 10), n /= 10;
+
+    int res = 0;
+    int last = 0;
+    for (int i = nums.size() - 1; i >= 0; i -- )
+    {
+        int x = nums[i];
+        for (int j = last; j < x; j ++ )
+            res += f[i + 1][j];
+        if (last > x) break;
+        last = x;
+        if (!x) res ++;
+    } 
+    return res;
+} 
 
 void solve()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
-    vector<int>d(n + 2), a(n + 1);
-    for (int i = 1; i <= n; i ++ )   cin >> d[i];
-    for (int i = 1; i <= n; i ++ )   cin >> a[i];
-    d[++ n] = m;
-    vector<vector<int>>dp (n + 1, vector<int>(n + 1, 1e12));
-    dp[1][1] = 0;
-    
-    for (int i = 2; i <= n; i ++ )
-        for (int j = 1; j <= i; j ++ )
-        {
-            for (int l = 1; l < i; l ++ ){
-                dp[i][j] = min(dp[i][j], dp[l][j - 1] + (d[i] - d[l]) * a[l]);
-                debug(i, j, dp[i][j]);
-            }
-        }
-    int sum = 1e9;
-    for (int i = 0; i <= k; i ++ ){
-        sum = min(sum, dp[n][n - i]);
-    }
-    cout << sum << endl;
+    cout << dp(r) - dp(l - 1) << endl;
 }
 
 signed main()
 {
+    init();
    ios::sync_with_stdio(false);
    cin.tie(0);
    cout.tie(0);
-   int _ = 1;
-   //cin >> _;
-   while (_--)
+   while(cin >> l >> r)
       solve();
 }

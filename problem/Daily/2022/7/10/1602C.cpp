@@ -21,28 +21,28 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
-    vector<int>d(n + 2), a(n + 1);
-    for (int i = 1; i <= n; i ++ )   cin >> d[i];
-    for (int i = 1; i <= n; i ++ )   cin >> a[i];
-    d[++ n] = m;
-    vector<vector<int>>dp (n + 1, vector<int>(n + 1, 1e12));
-    dp[1][1] = 0;
-    
-    for (int i = 2; i <= n; i ++ )
-        for (int j = 1; j <= i; j ++ )
-        {
-            for (int l = 1; l < i; l ++ ){
-                dp[i][j] = min(dp[i][j], dp[l][j - 1] + (d[i] - d[l]) * a[l]);
-                debug(i, j, dp[i][j]);
-            }
-        }
-    int sum = 1e9;
-    for (int i = 0; i <= k; i ++ ){
-        sum = min(sum, dp[n][n - i]);
-    }
-    cout << sum << endl;
+   int n;
+   cin >> n;
+   map<int,int>mp;
+   for (int j = 1; j <= n; j ++ )
+   {
+       int x;
+       cin >> x;
+       for (int i = 1; i <= 32; i ++ )
+       {
+           if ((x >> (i - 1)) & 1) mp[i] ++;
+       }
+   }
+   for (int k = 1; k <= n; k ++ )
+   {
+       bool flag = true;
+       for (int j = 1; j <= 32; j ++ )
+       {
+           flag &= ((mp[j] % k) == 0);
+       }
+       if (flag) cout << k << " ";
+   }
+   cout << endl;
 }
 
 signed main()
@@ -51,7 +51,7 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   //cin >> _;
+   cin >> _;
    while (_--)
       solve();
 }

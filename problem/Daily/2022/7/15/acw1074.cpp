@@ -22,18 +22,46 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 //≥£”√Õ∑
 #define int long long
 #define endl '\n'
-constexpr int N = 2e5 + 10;
+constexpr int N = 110;
+
+int n, m;
+vector<pair<int,int>>e[N];
+int dp[N][N];
+void dfs(int u, int fa)
+{
+
+    for (auto &v : e[u])
+    {
+        int j = v.first, w = v.second;
+        if (j == fa) continue;
+        dfs(j, u);
+        for (int i = m; i; i -- )
+        {
+            for (int k = 0; k < i; k ++ )
+            {
+                if (i - k - 1 >= 0) 
+                {
+                    dp[u][i] = max(dp[u][i], dp[u][i - k - 1] + dp[j][k] + w); 
+                    debug(u, i, dp[u][i]);
+                }
+            }
+        }
+    }
+}
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<int>v(n + 1);
-    for (int i = 1; i <= n; i ++ )
-    {
-       cin >> v[i];
-    }
 
+    cin >> n >> m;
+    for (int i = 1; i < n; i ++ )
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        e[a].push_back({b, c});
+        e[b].push_back({a, c});
+    }
+    dfs(1, 1);
+    cout << dp[1][m] << endl;
 }
 
 signed main()
@@ -42,7 +70,7 @@ signed main()
     cin.tie(0);
     cout.tie(0);
     int _ = 1;
-    cin >> _;
+    //cin >> _;
     while (_--)
        solve();
 }

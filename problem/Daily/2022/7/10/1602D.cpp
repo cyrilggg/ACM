@@ -19,30 +19,49 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 #define endl '\n'
 constexpr int N = 2e5 + 10;
 
+struct Node{
+    int idx;
+    vector<int>v;
+};
+
 void solve()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
-    vector<int>d(n + 2), a(n + 1);
-    for (int i = 1; i <= n; i ++ )   cin >> d[i];
-    for (int i = 1; i <= n; i ++ )   cin >> a[i];
-    d[++ n] = m;
-    vector<vector<int>>dp (n + 1, vector<int>(n + 1, 1e12));
-    dp[1][1] = 0;
-    
-    for (int i = 2; i <= n; i ++ )
-        for (int j = 1; j <= i; j ++ )
+   map<int,int>vis; 
+   int n;
+   cin >> n;
+   vector<int>a(n + 1), b(n + 1);
+   for (int i = 1; i <= n; i ++ )
+   {
+      cin >> a[i];
+   }
+   for (int i = 1; i <= n; i ++ )
+   {
+       cin >> b[i];
+   }
+   queue<Node> q;
+    vector<int>v;
+    q.push({0, v});
+    while (q.size())
+    {
+        auto t = q.front();
+        q.pop();
+        if (t.idx == n)
         {
-            for (int l = 1; l < i; l ++ ){
-                dp[i][j] = min(dp[i][j], dp[l][j - 1] + (d[i] - d[l]) * a[l]);
-                debug(i, j, dp[i][j]);
+            reverse(v.begin(), v.end());
+            cout << v.size() << endl;
+            for (auto vv : v)
+            {
+                cout << vv << " ";
             }
+            return;
         }
-    int sum = 1e9;
-    for (int i = 0; i <= k; i ++ ){
-        sum = min(sum, dp[n][n - i]);
+        for (int i = t.idx + 1; i <= n; i ++ )
+        {
+            if (vis[i]) continue;
+            if (i - t.idx > a[i]) continue;
+            
+        } 
     }
-    cout << sum << endl;
 }
 
 signed main()
@@ -51,7 +70,6 @@ signed main()
    cin.tie(0);
    cout.tie(0);
    int _ = 1;
-   //cin >> _;
    while (_--)
       solve();
 }

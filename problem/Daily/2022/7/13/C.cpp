@@ -21,28 +21,27 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
-    vector<int>d(n + 2), a(n + 1);
-    for (int i = 1; i <= n; i ++ )   cin >> d[i];
-    for (int i = 1; i <= n; i ++ )   cin >> a[i];
-    d[++ n] = m;
-    vector<vector<int>>dp (n + 1, vector<int>(n + 1, 1e12));
-    dp[1][1] = 0;
-    
-    for (int i = 2; i <= n; i ++ )
-        for (int j = 1; j <= i; j ++ )
-        {
-            for (int l = 1; l < i; l ++ ){
-                dp[i][j] = min(dp[i][j], dp[l][j - 1] + (d[i] - d[l]) * a[l]);
-                debug(i, j, dp[i][j]);
-            }
-        }
-    int sum = 1e9;
-    for (int i = 0; i <= k; i ++ ){
-        sum = min(sum, dp[n][n - i]);
+    int n;
+    cin >> n;
+    vector<int>v(n + 1), sum(n + 1);
+    for (int i = 1; i <= n; i ++ )
+    {
+        cin >> v[i];
+        sum[i] = sum[i - 1] + v[i];
     }
-    cout << sum << endl;
+    int ans = v[1];
+    for (int i = 1, j = 1;j <= n &&  i <= n; i ++ )
+    {
+        while (j <= n && sum[j] - sum[i - 1] >= ans)
+        { 
+            debug(i, j, ans, sum[j] - sum[i - 1]);
+            ans = max(sum[j] - sum[i - 1], ans);
+            j ++;
+        }
+
+    }
+    cout << ans << endl;
+
 }
 
 signed main()

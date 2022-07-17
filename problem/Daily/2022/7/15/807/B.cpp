@@ -29,11 +29,38 @@ void solve()
     int n;
     cin >> n;
     vector<int>v(n + 1);
+    int cnt = 0;
+    map<int,deque<int>>mp;
     for (int i = 1; i <= n; i ++ )
     {
        cin >> v[i];
+       if (i < n && v[i] == 0)
+       {
+           mp[0].push_back(i);
+       }    
     }
-
+    int ans = 0;
+    for (int i = 1; i <= n - 1; i ++ )
+    {
+        if (v[i] == 0) continue;
+        while (mp[0].size() && i > mp[0].front()){
+            mp[0].pop_front();
+        }
+        debug(i, ans, v[i], mp[0].size());
+        while (v[i] && mp[0].size() && mp[0].front() > i){
+            v[mp[0].front()] ++;
+            ans ++;
+            v[i] --;
+            mp[0].pop_front();
+        }
+        if (mp[0].empty())
+        {
+            ans += v[i];
+        }
+        debug(ans,i , v[i]);
+    }
+    debug(ans);
+    cout << ans << endl;
 }
 
 signed main()

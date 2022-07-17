@@ -17,32 +17,40 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 
 #define int long long
 #define endl '\n'
-constexpr int N = 2e5 + 10;
+constexpr int N = 1e5 + 10;
 
+int count (vector<int>&v)
+{
+    int pre = 0, now = 0, ans = 0;
+
+    sort(v.begin(), v.end());
+    for (auto &vv : v){
+        ans += now * vv - pre;
+        now ++, pre += vv;
+    }
+    return ans;
+}
 void solve()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
-    vector<int>d(n + 2), a(n + 1);
-    for (int i = 1; i <= n; i ++ )   cin >> d[i];
-    for (int i = 1; i <= n; i ++ )   cin >> a[i];
-    d[++ n] = m;
-    vector<vector<int>>dp (n + 1, vector<int>(n + 1, 1e12));
-    dp[1][1] = 0;
-    
-    for (int i = 2; i <= n; i ++ )
-        for (int j = 1; j <= i; j ++ )
-        {
-            for (int l = 1; l < i; l ++ ){
-                dp[i][j] = min(dp[i][j], dp[l][j - 1] + (d[i] - d[l]) * a[l]);
-                debug(i, j, dp[i][j]);
-            }
-        }
-    int sum = 1e9;
-    for (int i = 0; i <= k; i ++ ){
-        sum = min(sum, dp[n][n - i]);
-    }
-    cout << sum << endl;
+   int n, m;
+   cin >> n >> m;
+   map<int,vector<int>>c, r;
+   for (int i = 1; i <= n; i ++ )
+   {
+       for (int j = 1; j <= m; j ++ )
+       {
+            int x;
+            cin >> x;
+            c[x].push_back(i);
+            r[x].push_back(j);
+       }
+   }
+   int ans = 0;
+   for (int i = 1; i <= N; i ++ )
+   {
+       ans += count(c[i]) + count(r[i]);
+   }
+   cout << ans << endl;
 }
 
 signed main()

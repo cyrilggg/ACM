@@ -26,13 +26,39 @@ constexpr int N = 2e5 + 10;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<int>v(n + 1);
+    int a1 = -1e12, a2 = -1e12, a3 = -1e12 , a4 = -1e12;
+    int n, m;
+    cin >> n >> m;
+    vector<vector<char>>mp(n + 1, vector<char>(m + 1));
     for (int i = 1; i <= n; i ++ )
     {
-       cin >> v[i];
+        for (int j = 1; j <= m ; j ++ )
+        {
+            cin >> mp[i][j];
+            if (mp[i][j] == 'B')
+            {
+                a1 = max(a1, -i + j);
+                a2 = max(a2, -i - j);
+                a3 = max(a3, i - j);
+                a4 = max(a4, i + j);
+            }
+        }
     }
+    pair<int,int>an = {1, 1};
+    int ans = 1e12;
+    for (int i = 1; i <= n; i ++ )
+    {
+        for (int j = 1; j <= m; j ++ )
+        {
+            int t = max({a1 + i - j, a2 + i + j, a3 - i + j, a4 - i - j});
+            if (t < ans)
+            {
+                an = {i, j};
+                ans = t;
+            }
+        }
+    }
+    cout << an.first << ' ' << an.second << endl;
 
 }
 

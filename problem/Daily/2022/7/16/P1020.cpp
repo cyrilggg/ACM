@@ -22,18 +22,50 @@ template<typename Head, typename... Tail> void debug_out(Head H, Tail... T) { ce
 //³£ÓÃÍ·
 #define int long long
 #define endl '\n'
-constexpr int N = 2e5 + 10;
-
+constexpr int N = 1e5 + 10;
+int v[N], q[N];
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<int>v(n + 1);
-    for (int i = 1; i <= n; i ++ )
+    int n = 0;
+    while (cin >> v[n]) n ++ ;
+    int ans1 = 1, ans2 = 1;
+    q[1] = v[0];
+    for (int i = 1; i < n; i ++ )
     {
-       cin >> v[i];
+        int l = 0, r = ans1 + 1;
+        while (l < r)
+        {
+            int mid = l + r >> 1;
+            debug(l, r, mid, q[mid]);
+            if (q[mid] >= v[i]) l = mid + 1;
+            else r = mid;
+        }
+        q[l] = v[i];
+        ans1 = max(ans1, l);
+        
+        debug(i, ans1);
     }
+    cout << ans1 << endl;
 
+    memset(q, 0 ,sizeof q);
+
+    q[1] = v[0];
+    for (int i = 1; i < n; i ++ )
+    {
+        int l = 0, r = ans2 + 1;
+        while (l < r)
+        {
+            int mid = l + r >> 1;
+            debug(l, r, mid, q[mid]);
+            if (q[mid] <= v[i]) l = mid + 1;
+            else r = mid;
+            
+        }
+        q[l] = v[i];
+        ans2 = max(ans2, l);
+        debug(i, ans2);
+    }
+    cout << ans2 << endl;
 }
 
 signed main()
@@ -41,8 +73,5 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int _ = 1;
-    cin >> _;
-    while (_--)
        solve();
 }
